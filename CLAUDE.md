@@ -27,7 +27,7 @@ Process source of truth: `docs/playbooks/01-landing-page-and-deployment-playbook
 - Next.js 16 (App Router, TypeScript, Turbopack), React 19. **Static export** (`output: "export"`, `trailingSlash`, unoptimized images) so it can be hosted on GitHub Pages. `basePath` comes from `NEXT_PUBLIC_BASE_PATH` (set to `/montaa` in CI; unset locally and for a custom domain).
 - Tailwind CSS v4: tokens in `@theme` in `app/globals.css` (no tailwind.config). Fonts via `next/font/google`: Inter (`--f-inter`) and JetBrains Mono (`--f-mono`).
 - Framer Motion: used only for the waitlist modal transition.
-- Waitlist: no backend. The modal POSTs JSON to an external form service at `NEXT_PUBLIC_WAITLIST_ENDPOINT` (Formspree-style; optional `NEXT_PUBLIC_WAITLIST_KEY` is sent as `access_key` for Web3Forms-style services). If the endpoint is unset the modal shows "The waitlist isn't open yet".
+- Waitlist: no backend. The modal POSTs JSON to an external form service at `NEXT_PUBLIC_WAITLIST_ENDPOINT` (Formspree-style; optional `NEXT_PUBLIC_WAITLIST_KEY` is sent as `access_key` for Web3Forms-style services). The endpoint comes from the `WAITLIST_ENDPOINT` repo variable in CI. If unset the modal shows "The waitlist isn't open yet".
 
 ## File map
 - `app/page.tsx` — whole landing page (nav, hero, problem, how-it-works, capabilities, techniques, explainability, use cases, final CTA, footer) and all copy.
@@ -66,13 +66,13 @@ Process source of truth: `docs/playbooks/01-landing-page-and-deployment-playbook
 ## Open items
 - Real domain, company name/address for the footer and legal pages (currently placeholders; footer shows "© year Montaa").
 - Have someone with game-theory expertise review technique copy before public launch.
-- **Waitlist endpoint not configured yet:** the user must create a form (Formspree free tier, Web3Forms, etc.), then set repo variable `WAITLIST_ENDPOINT` (and `WAITLIST_KEY` if needed) and re-run the Pages workflow. Until then the modal says the waitlist isn't open yet.
-- Privacy page now says submissions are held by a third-party form provider; update it to name the provider once chosen.
+- Waitlist runs on **Formspree** (form `moevorwr`, free tier = 50 submissions/month; upgrade or switch to Web3Forms if the Product Hunt launch exceeds that). Signups arrive in the owner's Formspree inbox/dashboard, which is also where to export them. reCAPTCHA must stay off for our plain `fetch` submissions.
 - Custom domain later: set Pages custom domain, clear `NEXT_PUBLIC_BASE_PATH` in the workflow.
 
 ## Change log
 - 2026-10-02: Initial build of the landing page, waitlist, and Docker/Caddy files.
 - 2026-10-02: Repositioned copy from negotiation to decision making across page, metadata, modal, and privacy page (see Positioning and copy).
+- 2026-10-02: Connected Formspree (repo variable `WAITLIST_ENDPOINT`), privacy page names Formspree. We kept our own JSON `fetch` instead of adding `@formspree/react`: it's equivalent and avoids a dependency.
 - 2026-10-02: Switched to free hosting on GitHub Pages: static export, basePath, external-form waitlist, Pages workflow; self-hosted Docker/SQLite code moved to `archive/self-hosted/`; `docs/` gitignored from the public repo.
 - 2026-10-02: Renamed product Montara → Montaa everywhere (copy, wordmark, metadata, legal pages, package name, Caddyfile comment). Rewrote this file as full project memory.
 

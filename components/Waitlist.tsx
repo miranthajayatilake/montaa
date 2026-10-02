@@ -35,6 +35,7 @@ export function WaitlistProvider({ children }: { children: React.ReactNode }) {
           ...(accessKey ? { access_key: accessKey, subject: "Montaa waitlist signup" } : {}),
           email: f.get("email"),
           name: f.get("name"),
+          role: f.get("role"),
           useCase: f.get("useCase"),
         }),
       });
@@ -91,10 +92,20 @@ export function WaitlistProvider({ children }: { children: React.ReactNode }) {
                 <form onSubmit={submit} className="mt-5 space-y-3">
                   <h3 className="text-2xl font-semibold tracking-tight">Request access to Montaa.</h3>
                   <p className="pb-2 text-sm leading-relaxed text-fog">
-                    We&apos;re onboarding a small group of leaders facing live, high-stakes decisions.
+                    We&apos;re onboarding a small group of founders, deal teams and advisors facing a live, high-stakes decision.
                   </p>
                   <input name="email" type="email" required autoFocus placeholder="Work email" className={field} />
                   <input name="name" type="text" placeholder="Name (optional)" className={field} />
+                  <select name="role" defaultValue="" className={field} aria-label="Your role (optional)">
+                    <option value="">Your role (optional)</option>
+                    <option>Founder raising a round</option>
+                    <option>M&amp;A / corp-dev advisor</option>
+                    <option>VC / PE deal team</option>
+                    <option>Strategy consultant</option>
+                    <option>Negotiation / deal lawyer</option>
+                    <option>Executive</option>
+                    <option>Other</option>
+                  </select>
                   <input name="useCase" type="text" placeholder="What decision are you facing? (optional)" className={field} />
                   {error && <p className="text-sm text-alert">{error}</p>}
                   <button

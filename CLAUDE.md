@@ -17,11 +17,17 @@ Process source of truth: `docs/playbooks/01-landing-page-and-deployment-playbook
 - Reframed from "negotiation" to **decision making**. Why: a negotiation is just one kind of decision, and the user doesn't want the product to look limited to business/financial deals (e.g. an executive weighing an acquisition needs a decision/strategy, not just deal terms).
 - Guardrail: "decision making" alone is generic and crowded. The differentiator to keep visible is **decisions in a world of other actors** (rivals, boards, regulators, counterparties who react) — that is why game theory applies.
 - "Decision" is used in headlines (concrete, urgent); "strategy" in supporting copy (senior, bigger).
-- Hero: "Simulate the decision before you make it." Problem headline: "Your highest-stakes decisions are being made on intuition."
+- Hero (now "Stress-test the decision before you make it.", see refinement below; was "Simulate the decision before you make it."). Problem headline: "Your highest-stakes decisions are being made on intuition."
 - Capabilities: Stakeholder dynamics, Trade-off frontier, Risk assessment, Hidden actors.
 - Console mock and decision trace use an executive acquisition example (options: stage in via minority stake / acquire now / wait / pass). All illustrative.
-- Use cases: acquisitions and portfolio bets, market entry and competitive response, pricing and platform strategy, fundraising and cap tables, policy and coalition decisions, deal negotiations.
+- Audience cards ("Who it's for"): see refinement below (replaced the earlier generic use-case list).
 - Eyebrow/title/meta say "Decision intelligence"; waitlist modal asks "What decision are you facing?".
+
+## Positioning refinement: rare multi-party calls + honest uncertainty (2026-10-02)
+Driven by an outside review of the page. Two decisions:
+1. **Narrow the wedge.** Best fit is *rare, multi-party decisions*: negotiations, fundraising, M&A. Hero/CTA/meta now say so. "Where it applies" became **"Who it's for"** and lists the first test audiences: founders raising rounds, M&A and corp-dev advisors, VC/PE deal teams, strategy consultants, negotiation/deal lawyers (+ executives facing a one-off bet). Founders and consultants are the cheapest to reach and learn from, so recruit them first. The modal has an optional **role** dropdown (sent to Formspree as `role`) so we can see which audience signs up.
+2. **Position as a stress test for thinking, not a prediction.** Biggest risk: outputs rest on inputs the user and an LLM guess, so precise-looking numbers (e.g. "71% of rollouts", "0.64") overstate accuracy. So: hero says "Stress-test the decision before you make it"; the console mock shows **ranges** (not point estimates) ranked by robustness, with an input-confidence line ("6 of 9 inputs are your estimates"); the explainability section is "A stress test for your thinking, not a prediction" with *Flips if* and *Confidence* rows; the hidden-actor diagram says "likelihood: high (estimate)" instead of a probability; footer says "decision support, not a forecast". **Rule for future copy: no precise percentages or point values presented as findings; use ranges, "most", or flip-points.**
+- **Known gaps (not fixable without real facts from the owner):** no proof/traction, no team section, no pricing. Never invent them. The page is honest instead: "Pre-launch · all figures illustrative · no customer results yet". Add real ones when they exist.
 
 ## Stack
 - Next.js 16 (App Router, TypeScript, Turbopack), React 19. **Static export** (`output: "export"`, `trailingSlash`, unoptimized images) so it can be hosted on GitHub Pages. `basePath` comes from `NEXT_PUBLIC_BASE_PATH` (set to `/montaa` in CI; unset locally and for a custom domain).
@@ -72,6 +78,7 @@ Process source of truth: `docs/playbooks/01-landing-page-and-deployment-playbook
 ## Change log
 - 2026-10-02: Initial build of the landing page, waitlist, and Docker/Caddy files.
 - 2026-10-02: Repositioned copy from negotiation to decision making across page, metadata, modal, and privacy page (see Positioning and copy).
+- 2026-10-02: Copy revision: rare multi-party wedge, "Who it's for" audience cards, stress-test-not-prediction framing, ranges instead of point estimates, role dropdown in the waitlist modal, pre-launch honesty line (see Positioning refinement).
 - 2026-10-02: Connected Formspree (repo variable `WAITLIST_ENDPOINT`), privacy page names Formspree. We kept our own JSON `fetch` instead of adding `@formspree/react`: it's equivalent and avoids a dependency.
 - 2026-10-02: Switched to free hosting on GitHub Pages: static export, basePath, external-form waitlist, Pages workflow; self-hosted Docker/SQLite code moved to `archive/self-hosted/`; `docs/` gitignored from the public repo.
 - 2026-10-02: Renamed product Montara → Montaa everywhere (copy, wordmark, metadata, legal pages, package name, Caddyfile comment). Rewrote this file as full project memory.

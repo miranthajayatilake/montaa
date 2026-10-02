@@ -44,7 +44,7 @@ const capabilities = [
     id: "risk",
     name: "Risk assessment",
     tag: "Know the bad day before it arrives.",
-    body: "Thousands of simulated futures turn gut-feel risk into a distribution. See the median, the tail, and which of your moves fatten or thin it.",
+    body: "Thousands of simulated futures turn gut-feel risk into a range of outcomes, not a single number. See the median, the tail, and which of your moves fatten or thin it.",
     bullets: ["Monte Carlo outcome distributions", "Tail-risk and walk-away (BATNA) stress tests", "Minimax-regret recommendations under uncertainty"],
     visual: <RiskDistribution />,
   },
@@ -52,7 +52,7 @@ const capabilities = [
     id: "hidden",
     name: "Hidden actors",
     tag: "The party not at the table still votes.",
-    body: "Boards, regulators, investors, rival bidders: influence that never appears on the invite. Montaa infers likely hidden actors from observed behaviour and prices their effect into every scenario.",
+    body: "Boards, regulators, investors, rival bidders: influence that never appears on the invite. Montaa estimates how likely hidden actors are from observed behaviour and tests every scenario with and without them.",
     bullets: ["Bayesian belief updating on private information", "Latent-influence detection from observed moves", "Scenarios with and without the unseen actor"],
     visual: <HiddenPlayers />,
   },
@@ -60,9 +60,9 @@ const capabilities = [
 
 const steps = [
   { n: "01", t: "Describe", d: "Write the decision in plain language: who is involved, what each party wants, the options on the table, what's at stake, what you already know." },
-  { n: "02", t: "Model", d: "Montaa turns your brief into a formal game: players, information, preferences, moves, and the hidden unknowns." },
-  { n: "03", t: "Simulate", d: "Tens of thousands of rollouts play out every branch — including adversaries who adapt, bluff, and misjudge." },
-  { n: "04", t: "Decide", d: "Get a ranked next move, the trade-offs behind it, the risks you're taking, and a trace of why." },
+  { n: "02", t: "Model", d: "Montaa turns your brief into a formal game — players, information, preferences, moves, hidden unknowns — and lists every assumption it made so you can correct it." },
+  { n: "03", t: "Simulate", d: "Tens of thousands of rollouts play out every branch across your uncertainty ranges — including counterparts who adapt, bluff, and misjudge." },
+  { n: "04", t: "Decide", d: "Get the move that holds up best across scenarios, shown as ranges with the trade-offs, the risks, and what would change the answer." },
 ];
 
 const methods = [
@@ -81,12 +81,12 @@ const methods = [
 ];
 
 const uses = [
-  ["Acquisitions and portfolio bets", "Whether, when and how to buy, with boards, rivals and regulators in play."],
-  ["Market entry and competitive response", "How incumbents and challengers will react to your move."],
-  ["Pricing and platform strategy", "Price moves, partner terms and the reactions they trigger."],
-  ["Fundraising and cap tables", "Lead investors, follow-on, pro-rata and signalling effects."],
-  ["Policy and coalition decisions", "Blocs, veto players and issue-linkage across parties."],
-  ["Deal negotiations", "Price, structure and concession sequencing across several parties."],
+  ["Founders raising a round", "Lead and follow-on dynamics, terms versus dilution, and who signals whom."],
+  ["M&A and corp-dev advisors", "Bidder behaviour, board and activist dynamics, and the sequencing of your next move."],
+  ["VC and PE deal teams", "Competitive processes, syndicate dynamics and when to push or walk."],
+  ["Strategy consultants", "Pressure-test a client's recommendation against how rivals and stakeholders will react."],
+  ["Negotiation and deal lawyers", "Concession sequencing and walk-away points across several parties."],
+  ["Executives facing a one-off bet", "An acquisition, a market entry or a pricing move where rivals and boards respond."],
 ];
 
 export default function Home() {
@@ -122,11 +122,11 @@ export default function Home() {
               <span className="inline-block h-2 w-2 bg-signal" /> Montaa // Decision intelligence
             </p>
             <h1 className="max-w-4xl text-[2.6rem] font-semibold leading-[1.02] tracking-[-0.03em] md:text-[5.2rem]">
-              Simulate the decision <span className="text-signal">before</span> you make it.
+              Stress-test the decision <span className="text-signal">before</span> you make it.
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-relaxed text-fog md:text-xl">
-              Montaa models the people, incentives and unknowns around your highest-stakes decisions, runs thousands of
-              possible futures, and shows you the best next move and exactly why.
+              For the rare, multi-party calls you only get once — a funding round, an acquisition, a negotiation. Montaa models the
+              other side&apos;s incentives and unknowns, plays out how it could go, and shows which move holds up best and what would change the answer.
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
               <CtaButton>Request early access →</CtaButton>
@@ -137,10 +137,10 @@ export default function Home() {
           </div>
           <div className="relative border-t border-line bg-ink/70 backdrop-blur-sm">
             <div className={`${wrap} label grid grid-cols-2 gap-y-3 py-5 text-fog md:grid-cols-4`}>
-              <span><b className="text-bone">N-party</b> equilibrium analysis</span>
-              <span><b className="text-bone">10⁴–10⁶</b> simulated rollouts</span>
-              <span><b className="text-bone">Hidden-player</b> inference</span>
-              <span><b className="text-bone">Fully</b> explainable output</span>
+              <span><b className="text-bone">Multi-party</b> equilibrium analysis</span>
+              <span><b className="text-bone">Thousands</b> of simulated futures</span>
+              <span><b className="text-bone">Assumptions</b> you can see and edit</span>
+              <span><b className="text-bone">Ranges,</b> not false precision</span>
             </div>
           </div>
         </section>
@@ -159,7 +159,7 @@ export default function Home() {
                   Intuition can&apos;t hold all of that at once, and one wrong call can cost a deal, a company or a decade.
                 </p>
                 <p className="text-bone">
-                  Montaa replaces guesswork with a rigorous model of the game you&apos;re actually in.
+                  Montaa doesn&apos;t predict the future. It puts your assumptions on the table, plays them out against the other side, and shows which moves still hold up when you&apos;re wrong.
                 </p>
               </div>
             </div>
@@ -171,7 +171,7 @@ export default function Home() {
           <div className={wrap}>
             <SectionTag n="02">How it works</SectionTag>
             <h2 className="mt-8 max-w-3xl text-3xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              Describe the situation. Montaa does the game theory.
+              Describe the situation. Montaa stress-tests it.
             </h2>
             <div className="mt-14 grid gap-12 lg:grid-cols-12">
               <ol className="grid gap-px border border-line bg-line sm:grid-cols-2 lg:col-span-6">
@@ -188,7 +188,7 @@ export default function Home() {
               <div className="brackets border border-line-strong bg-ink lg:col-span-6">
                 <div className="label flex items-center justify-between border-b border-line px-4 py-3 text-fog">
                   <span>montaa // session 0417</span>
-                  <span className="text-signal">● illustrative</span>
+                  <span className="text-signal">● illustrative · not a forecast</span>
                 </div>
                 <div className="space-y-5 p-5 font-mono text-[0.8rem] leading-relaxed">
                   <div>
@@ -205,6 +205,9 @@ export default function Home() {
                     <p className="mt-1 text-fog">
                       rollouts: <span className="text-bone">50,000</span> · solver: <span className="text-bone">Bayesian NE + CFR</span>
                     </p>
+                    <p className="mt-1 text-fog">
+                      input confidence: <span className="text-bone">low–medium</span> · 6 of 9 inputs are your estimates
+                    </p>
                   </div>
                   <div className="border-t border-line pt-4">
                     <p className="label text-fog">Recommended next move</p>
@@ -213,16 +216,17 @@ export default function Home() {
                     </p>
                     <table className="mt-4 w-full text-left">
                       <thead className="label text-fog">
-                        <tr><th className="pb-2 font-normal">Option</th><th className="pb-2 font-normal">E[value]</th><th className="pb-2 font-normal">P5 risk</th></tr>
+                        <tr><th className="pb-2 font-normal">Option</th><th className="pb-2 font-normal">Outcome range</th><th className="pb-2 font-normal">Bad case</th></tr>
                       </thead>
                       <tbody>
-                        {[["Stage in via minority stake", "0.64", "−0.15", true], ["Acquire now", "0.58", "−0.44", false], ["Wait six months", "0.44", "−0.23", false], ["Pass", "0.20", "−0.05", false]].map(([a, b, c, best]) => (
+                        {[["Stage in via minority stake", "0.50 – 0.75", "−0.25 – −0.05", true], ["Acquire now", "0.40 – 0.75", "−0.60 – −0.25", false], ["Wait six months", "0.25 – 0.60", "−0.35 – −0.10", false], ["Pass", "0.10 – 0.30", "−0.10 – 0.00", false]].map(([a, b, c, best]) => (
                           <tr key={String(a)} className={`border-t border-line ${best ? "text-signal" : "text-fog"}`}>
                             <td className="py-2">{a}</td><td>{b}</td><td>{c}</td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
+                    <p className="mt-3 text-fog">Ranked by how well each option holds up across assumptions, not by a point estimate.</p>
                   </div>
                 </div>
               </div>
@@ -289,14 +293,12 @@ export default function Home() {
         <section id="explainable" className="scroll-mt-16 border-b border-line py-24 md:py-32">
           <div className={`${wrap} grid gap-14 md:grid-cols-12`}>
             <div className="md:col-span-5">
-              <SectionTag n="05">Explainability</SectionTag>
+              <SectionTag n="05">Honest by design</SectionTag>
               <h2 className="mt-8 text-3xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-                Deep, but never a black box.
+                A stress test for your thinking, not a prediction.
               </h2>
               <p className="mt-6 text-lg leading-relaxed text-fog">
-                A recommendation you can&apos;t defend is one you can&apos;t use. Every Montaa output is traceable to
-                the assumptions, scenarios and equilibria that produced it — so you can challenge it, change it,
-                and take it into the room with confidence.
+                Every model of a live deal rests on estimates — yours and ours — and Montaa won&apos;t dress them up as certainty. Outputs are ranges. Every assumption is visible and editable. And you&apos;re told which assumption would flip the recommendation, so you can challenge it before you act on it.
               </p>
             </div>
             <div className="md:col-span-7">
@@ -304,10 +306,11 @@ export default function Home() {
                 <div className="label border-b border-line px-5 py-3 text-fog">Decision trace · illustrative</div>
                 {[
                   ["Recommendation", "Take a minority stake now; keep the option to acquire."],
-                  ["Because", "In 71% of rollouts where a rival bidder emerges, acquiring outright at today's price overpays; a staged entry preserves the upside."],
+                  ["Because", "In most rollouts where a rival bidder emerges, buying outright at today's price overpays; a staged entry holds up better."],
                   ["Assuming", "Board stays split · regulator review ≥ 90 days · rival has not yet valued the asset."],
                   ["Breaks if", "The target accelerates a competing process. Re-run recommended."],
-                  ["Sensitivity", "Most influential input: activist's exit price (±0.18 on E[value])."],
+                  ["Flips if", "The activist's exit price is ~15% lower than assumed: 'Acquire now' then ranks first."],
+                  ["Confidence", "Low–medium. 6 of 9 inputs are your estimates. Treat the ranking as a stress test, not a forecast."],
                 ].map(([k, v]) => (
                   <div key={k} className="grid gap-1 border-b border-line px-5 py-4 last:border-0 sm:grid-cols-[9rem_1fr] sm:gap-6">
                     <p className="label text-signal">{k}</p>
@@ -322,9 +325,9 @@ export default function Home() {
         {/* USE CASES */}
         <section className="border-b border-line bg-panel py-24 md:py-32">
           <div className={wrap}>
-            <SectionTag n="06">Where it applies</SectionTag>
+            <SectionTag n="06">Who it&apos;s for</SectionTag>
             <h2 className="mt-8 max-w-3xl text-3xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              Built for decisions where other people&apos;s moves matter.
+              Built for the rare, multi-party calls.
             </h2>
             <div className="mt-14 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
               {uses.map(([t, d]) => (
@@ -342,12 +345,13 @@ export default function Home() {
           <div className={`${wrap} relative text-center`}>
             <Mark className="mx-auto h-10 w-10 text-signal" />
             <h2 className="mx-auto mt-8 max-w-4xl text-4xl font-semibold leading-[1.05] tracking-[-0.025em] md:text-7xl">
-              Decide knowing how it ends.
+              Stress-test your next big call.
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-lg text-fog">
-              Montaa is opening to a small group of early users. Tell us what you&apos;re deciding.
+              Montaa is in development and opening to a small founding group — founders, deal teams and advisors facing a live decision. Tell us what you&apos;re weighing.
             </p>
             <div className="mt-10 flex justify-center"><CtaButton>Request early access →</CtaButton></div>
+            <p className="label mt-8 text-fog">Pre-launch · all figures on this page are illustrative · no customer results yet</p>
           </div>
         </section>
       </main>
@@ -360,7 +364,7 @@ export default function Home() {
             <span>© {new Date().getFullYear()} Montaa</span>
           </div>
           <p className="max-w-md normal-case tracking-normal md:text-right">
-            Montaa is decision support. Outputs are probabilistic models, not guarantees or professional advice.
+            Montaa is decision support, not a forecast. Outputs depend on assumptions and are not guarantees or professional (legal, financial) advice.
           </p>
           <div className="flex gap-6">
             <Link href="/privacy" className="hover:text-bone">Privacy</Link>

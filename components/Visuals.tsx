@@ -84,8 +84,8 @@ export function HiddenPlayers() {
       <circle cx="190" cy="125" r="34" fill="none" stroke={S} strokeOpacity="0.2" />
       <circle cx="190" cy="125" r="24" fill="#0a0b0a" stroke={S} strokeWidth="1.4" strokeDasharray="3 3" />
       <text x="190" y="131" fill={S} fontSize="18" fontFamily="var(--font-mono)" textAnchor="middle">?</text>
-      <text x="190" y="182" fill={S} fontSize="9" fontFamily="var(--font-mono)" textAnchor="middle" letterSpacing="1.4">INFERRED INFLUENCE</text>
-      <text x="190" y="196" fill={F} fontSize="9" fontFamily="var(--font-mono)" textAnchor="middle" letterSpacing="1.4">P(PRESENT) = 0.71</text>
+      <text x="190" y="226" fill={S} fontSize="9" fontFamily="var(--font-mono)" textAnchor="middle" letterSpacing="1.4">INFERRED INFLUENCE</text>
+      <text x="190" y="241" fill={F} fontSize="9" fontFamily="var(--font-mono)" textAnchor="middle" letterSpacing="1.4">LIKELIHOOD: HIGH (ESTIMATE)</text>
     </svg>
   );
 }

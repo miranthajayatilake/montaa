@@ -1,0 +1,14 @@
+# Add the real domain here once DNS points at the server, e.g.:
+# montaa.example, www.montaa.example {
+#     log { output stdout; format console }
+#     reverse_proxy web:3000
+# }
+
+# Plain-HTTP fallback on the bare IP (Let's Encrypt can't issue certs for IPs).
+:80 {
+    log {
+        output stdout
+        format console
+    }
+    reverse_proxy web:3000
+}

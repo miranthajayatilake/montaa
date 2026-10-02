@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--f-inter" });
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--f-mono" });
 
 export const metadata: Metadata = {
-  title: "Montaa — Decision Intelligence",
+  title: "Montaa — Decision Intelligence (pre-launch)",
   description:
     "Stress-test the decision before you make it. For rare, multi-party calls — funding rounds, M&A, negotiations — Montaa models the other side, simulates how it could play out, and shows which move holds up best.",
 };

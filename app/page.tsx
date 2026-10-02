@@ -1,6 +1,6 @@
 import Link from "next/link";
 import HeroCanvas from "@/components/HeroCanvas";
-import { CtaButton, WaitlistProvider } from "@/components/Waitlist";
+import { CtaButton, InlineSignup, WaitlistProvider } from "@/components/Waitlist";
 import { GainDynamics, HiddenPlayers, ParetoFrontier, RiskDistribution } from "@/components/Visuals";
 
 const wrap = "mx-auto w-full max-w-[1280px] px-6 md:px-10";
@@ -105,7 +105,7 @@ export default function Home() {
             <Link href="/#techniques" className="hover:text-bone">Techniques</Link>
             <Link href="/#explainable" className="hover:text-bone">Explainability</Link>
           </nav>
-          <CtaButton variant="ghost">Request access</CtaButton>
+          <CtaButton variant="ghost">Join the list</CtaButton>
         </div>
       </header>
 
@@ -118,8 +118,9 @@ export default function Home() {
             <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent" />
           </div>
           <div className={`${wrap} relative pb-14 pt-24 md:pb-20`}>
-            <p className="label mb-6 flex items-center gap-3 text-signal">
-              <span className="inline-block h-2 w-2 bg-signal" /> Montaa // Decision intelligence
+            <p className="label mb-6 flex flex-wrap items-center gap-x-4 gap-y-3 text-signal">
+              <span className="flex items-center gap-3"><span className="inline-block h-2 w-2 bg-signal" /> Montaa // Decision intelligence</span>
+              <span className="border border-signal/60 px-2 py-1 text-[0.625rem] text-signal">Pre-launch · design partners wanted</span>
             </p>
             <h1 className="max-w-4xl text-[2.6rem] font-semibold leading-[1.02] tracking-[-0.03em] md:text-[5.2rem]">
               Stress-test the decision <span className="text-signal">before</span> you make it.
@@ -129,7 +130,7 @@ export default function Home() {
               other side&apos;s incentives and unknowns, plays out how it could go, and shows which move holds up best and what would change the answer.
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
-              <CtaButton>Request early access →</CtaButton>
+              <CtaButton>Join the design-partner list →</CtaButton>
               <Link href="/#method" className="label inline-flex items-center border border-line-strong px-5 py-4 text-bone transition hover:-translate-y-0.5 hover:border-signal hover:text-signal">
                 See how it works
               </Link>
@@ -286,6 +287,16 @@ export default function Home() {
                 </div>
               ))}
             </div>
+            <div className="mt-10 border-t border-black/20 pt-6 text-sm leading-relaxed text-black/65">
+              <p className="label text-black">Grounded in the literature</p>
+              <p className="mt-3">
+                Nash (1950), <i>The Bargaining Problem</i> · Harsanyi (1967–68), <i>Games with Incomplete Information Played by &ldquo;Bayesian&rdquo; Players</i> ·
+                Shapley (1953), <i>A Value for n-Person Games</i> · Kalai &amp; Smorodinsky (1975), <i>Other Solutions to Nash&apos;s Bargaining Problem</i> ·
+                McKelvey &amp; Palfrey (1995), <i>Quantal Response Equilibria for Normal Form Games</i> ·
+                Kocsis &amp; Szepesv&aacute;ri (2006), <i>Bandit Based Monte-Carlo Planning</i> ·
+                Zinkevich et al. (2007), <i>Regret Minimization in Games with Incomplete Information</i>
+              </p>
+            </div>
           </div>
         </section>
 
@@ -345,12 +356,16 @@ export default function Home() {
           <div className={`${wrap} relative text-center`}>
             <Mark className="mx-auto h-10 w-10 text-signal" />
             <h2 className="mx-auto mt-8 max-w-4xl text-4xl font-semibold leading-[1.05] tracking-[-0.025em] md:text-7xl">
-              Stress-test your next big call.
+              Help shape Montaa.
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-lg text-fog">
-              Montaa is in development and opening to a small founding group — founders, deal teams and advisors facing a live decision. Tell us what you&apos;re weighing.
+              Montaa is in development. We&apos;re inviting a small group of founders, deal teams and advisors facing a live decision to shape it and get first access.
             </p>
-            <div className="mt-10 flex justify-center"><CtaButton>Request early access →</CtaButton></div>
+            <div className="mt-10"><InlineSignup /></div>
+            <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-fog">
+              This form asks for no deal details, so please don&apos;t include confidential information. See our{" "}
+              <Link href="/privacy" className="text-bone underline underline-offset-4">privacy note</Link>. Montaa is decision support, not financial or legal advice.
+            </p>
             <p className="label mt-8 text-fog">Pre-launch · all figures on this page are illustrative · no customer results yet</p>
           </div>
         </section>
